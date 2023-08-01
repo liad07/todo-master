@@ -26,7 +26,6 @@ def connect_to_database():
     except pyodbc.Error as e:
         print(f"Error connecting to the database: {e}")
         return None, None
-
 # Function to create a new task in the "Tasks" table
 def create_task(user_id, title, description, priority, status, due_date):
     try:
@@ -714,6 +713,8 @@ def task_details(task_id):
                             <p>Description: {task[2]}</p>
                             <p>Due Date: {task[5]}</p>
                             <p>Status: {task[4]}</p>
+                            <a href="{url_for("edit_task",task_id=task_id)}" class="btn btn-primary">edit</a>
+
                                                     </div>
 
                             <!-- Display other task details as needed -->

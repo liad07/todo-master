@@ -30,7 +30,7 @@ To run TodoMaster locally on your machine, follow these steps:
 1. Clone the repository from GitHub:
 
    ```
-   git clone https://github.com/liad07/TodoMaster.git
+   git clone [https://github.com/liad07/TodoMaster.git](https://github.com/liad07/todo-master.git)
    ```
 
 2. Navigate to the project directory:

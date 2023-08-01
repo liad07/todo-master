@@ -16,7 +16,7 @@ def calculate_project_budget(muchforhour,numofhour,difficulty, clientdurak):
 def connect_to_database():
     try:
         # Replace 'your_database_file_path' with the actual path to your Access database file
-        DATABASE_PATH = r'some path'
+        DATABASE_PATH = r'path here '
 
         conn_str = r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ='+DATABASE_PATH+''
         connection = pyodbc.connect(conn_str)
@@ -338,7 +338,7 @@ def index():
                 <!DOCTYPE html>
                 <html>
                 <head>
-                    <title>Your To-Do App</title>
+                    <title>Todo Master</title>
                     <link rel="stylesheet" href="{url_for('static', filename='css/bootstrap.min.css')}">
                     <link rel="stylesheet" href="{url_for('static', filename='css/styles.css')}">
                 </head>
@@ -358,7 +358,7 @@ def index():
 
                     <div class="container mt-5">
                         <div class="jumbotron text-center">
-                            <h1 class="display-4">Welcome to Your To-Do App</h1>
+                            <h1 class="display-4">Welcome to Todo Master</h1>
                             <p class="lead">TodoMaster is a powerful task management web application that allows users to organize their tasks efficiently. With TodoMaster, users can create, edit, prioritize, and track their tasks, ensuring nothing falls through the cracks.</p>
                             <hr class="my-4">
                             <div class="task-list">
@@ -401,7 +401,7 @@ def index():
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Your To-Do App</title>
+        <title>Todo Master</title>
         <link rel="stylesheet" href="{url_for('static', filename='css/bootstrap.min.css')}">
         <link rel="stylesheet" href="{url_for('static', filename='css/styles.css')}">
     </head>
@@ -420,7 +420,7 @@ def index():
 
         <div class="container mt-5">
             <div class="jumbotron text-center">
-                <h1 class="display-4">Welcome to Your To-Do App</h1>
+                <h1 class="display-4">Welcome to Todo Master</h1>
                 <p class="lead">Here, you can manage your tasks efficiently with our awesome To-Do App. Stay organized and focused on what matters!</p>
                 <hr class="my-4">
                 <p>Key features of our app include:</p>
@@ -876,104 +876,6 @@ def edit_task(task_id):
     return redirect(url_for('login'))
 
 
-#@app.route('/edit_task/<int:task_id>', methods=['GET', 'POST'])
-#def edit_task(task_id):
-#    user_id = session.get('user_id')
-#
-#    if user_id:
-#        # Check if the user owns the task
-#        connection, cursor = connect_to_database()
-#        if connection:
-#            sql = "SELECT UserID FROM Tasks WHERE TaskID=?"
-#            cursor.execute(sql, (task_id,))
-#            task_owner = cursor.fetchone()
-#
-#            if task_owner and task_owner['UserID'] == user_id:
-#                if request.method == 'POST':
-#                    # Retrieve updated task details from the form
-#                    title = request.form.get('title')
-#                    description = request.form.get('description')
-#                    priority = request.form.get('priority')
-#                    status = request.form.get('status')
-#                    due_date = request.form.get('due_date')
-#
-#                    # Update the task details in the database
-#                    update_task_in_database(task_id, title, description, priority, status, due_date)
-#
-#                    # Redirect back to the task details page after successful edit
-#                    return redirect(url_for('task_details', task_id=task_id))
-#
-#                # Fetch the existing task details from the database
-#                sql = "SELECT * FROM Tasks WHERE TaskID=?"
-#                cursor.execute(sql, (task_id,))
-#                task = cursor.fetchone()
-#
-#                if task:
-#                    # Generate HTML for the edit task form with pre-filled values
-#                    edit_task_form = f"""
-#                    <h1>Edit Task</h1>
-#                    <form method="post">
-#                        <div class="form-group">
-#                            <label for="title">Title:</label>
-#                            <input type="text" class="form-control" id="title" name="title" value="{task['Title']}" required>
-#                        </div>
-#                        <div class="form-group">
-#                            <label for="description">Description:</label>
-#                            <textarea class="form-control" id="description" name="description" rows="3">{task['Description']}</textarea>
-#                        </div>
-#                        <div class="form-group">
-#                            <label for="priority">Priority:</label>
-#                            <select class="form-control" id="priority" name="priority" required>
-#                                <option value="High" {'selected' if task['Priority'] == 'High' else ''}>High</option>
-#                                <option value="Medium" {'selected' if task['Priority'] == 'Medium' else ''}>Medium</option>
-#                                <option value="Low" {'selected' if task['Priority'] == 'Low' else ''}>Low</option>
-#                            </select>
-#                        </div>
-#                        <div class="form-group">
-#                            <label for="status">Status:</label>
-#                            <select class="form-control" id="status" name="status" required>
-#                                <option value="Pending" {'selected' if task['Status'] == 'Pending' else ''}>Pending</option>
-#                                <option value="In Progress" {'selected' if task['Status'] == 'In Progress' else ''}>In Progress</option>
-#                                <option value="Completed" {'selected' if task['Status'] == 'Completed' else ''}>Completed</option>
-#                            </select>
-#                        </div>
-#                        <div class="form-group">
-#                            <label for="due_date">Due Date:</label>
-#                            <input type="date" class="form-control" id="due_date" name="due_date" value="{task['DueDate']}" required>
-#                        </div>
-#                        <button type="submit" class="btn btn-primary">Save Changes</button>
-#                    </form>
-#                    """
-#
-#                    return f"""
-#                    <!DOCTYPE html>
-#                    <html>
-#                    <head>
-#                        <title>Edit Task</title>
-#                        <link rel="stylesheet" href="{url_for('static', filename='css/bootstrap.min.css')}">
-#                        <link rel="stylesheet" href="{url_for('static', filename='css/styles.css')}">
-#                    </head>
-#                    <body>
-#                        <nav class="navbar navbar-dark bg-dark">
-#                            <div class="container">
-#                                <a class="navbar-brand" href="/">TodoMaster</a>
-#                                <div class="navbar-nav ml-auto">
-#                                    <a class="nav-link" href="{url_for('logout')}">Logout</a>
-#                                </div>
-#                            </div>
-#                        </nav>
-#
-#                        <div class="container mt-5">
-#                            <div class="jumbotron text-center">
-#                                {edit_task_form}
-#                                <a class="btn btn-primary" href="/" role="button">Back to Task List</a>
-#                            </div>
-#                        </div>
-#                    </body>
-#                    </html>
-#                    """
-#
-#    # If the user is not logged in or does not own the task, redirect to the login page
-#    return redirect(url_for('login'))
+
 if __name__ == '__main__':
     app.run(debug=True)
